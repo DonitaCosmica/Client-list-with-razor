@@ -1,0 +1,173 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+#form-background {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100dvw;
+  height: 100dvh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+}
+
+#form-background > form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 30%;
+  height: 45%;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.cancel-btn-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 20px;
+  top: 20px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.cancel-btn,
+.cancel-btn::before {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+}
+
+.cancel-btn {
+  transform: rotate(45deg);
+}
+
+.cancel-btn::before {
+  content: '';
+  transform: rotate(90deg);
+}
+
+#form-background > form > h2 {
+  text-align: center;
+}
+
+#form-background > form > input {
+  width: 60%;
+  height: 30px;
+  color: #000;
+  padding: 5px 10px;
+  border: transparent;
+  border-radius: 10px;
+  background-color: #eef6f3;
+  transition: ease-in-out 0.6s;
+}
+
+#form-background > form > input:focus {
+  color: #000;
+  border: 1px solid #000;
+  transition: ease-in-out 0.6s;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.add-btn-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+}
+
+h1 {
+  flex: 1;
+  color: #007bff;
+}
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+.edit-btn, .delete-btn, .add-btn, #send-btn {
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+
+#send-btn {
+  background-color: #007bff;
+}
+
+#send-btn:hover {
+  background-color: #0060c7;
+}
+
+.add-btn {
+  background-color: #28a745;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+}
+
+.edit-btn {
+  background-color: #c2b238;
+}
+
+.edit-btn:hover {
+  background-color: #b6a735;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}

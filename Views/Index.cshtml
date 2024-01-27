@@ -1,0 +1,97 @@
+@using Aprendizaje.Models;
+@model List<Customer>
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="utf-8"/>
+      <title>Client List</title>
+      <link rel="stylesheet" type="text/css" href="~/css/site.css?1.0" media="all"/>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Client List</h1>
+      <div class="add-btn-container">
+        <button 
+          class="add-btn" 
+          onclick="showForm((event) => addCustomer(event), this)"
+        >
+          New
+        </button>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>CustomerId</th>
+          <th>Name</th>
+          <th>Country</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach(var customer in Model)
+        {
+          <tr>
+            <td>@customer.CustomerId</td>
+            <td>@customer.Name</td>
+            <td>@customer.Country</td>
+            <td>
+              <button 
+                class="edit-btn" 
+                data-name="@customer.Name"
+                data-country="@customer.Country"
+                onclick="showForm((event) => editCustomer(event, @customer.CustomerId), this, '@customer.Name', '@customer.Country')"
+              >
+                Edit
+              </button>
+              <button 
+                class="delete-btn" 
+                onclick="deleteCustomer(@customer.CustomerId)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <section id="form-background">
+      <form id="customerForm">
+        <div class="cancel-btn-container" onclick="unshowForm()">
+          <span class="cancel-btn"></span>
+        </div>
+        <h2>Create new customer</h2>
+        <input type="number" id="icustomer" placeholder="Id" autoComplete="off">
+        <input type="text" id="ncustomer" placeholder="Name" autoComplete="off">
+        <input type="text" id="ccustomer" placeholder="Country" autoComplete="off">
+        <button id="send-btn"></button>
+      </form>
+    </section>
+    
+    <script src="~/js/site.js?1.0"></script>
+    <script>
+      const showForm = (submitFunction, invokeBtn) => {
+        CustomerFunc.showForm({ submitFunction, invokeBtn })
+      }
+
+      const unshowForm = () => {
+        CustomerFunc.unshowForm()
+      }
+
+      const addCustomer = async (event) => {
+        await CustomerFunc.addCustomer({ event })
+      }
+
+      const editCustomer = async (event, customerId) => {
+        await CustomerFunc.editCustomer({ event, customerId })
+      }
+
+      const deleteCustomer = async (customerId) => {
+        await CustomerFunc.deleteCustomer({ customerId })
+      }
+    </script>
+  </body>
+</html>
