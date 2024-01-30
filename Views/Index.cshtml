@@ -6,7 +6,7 @@
   <head>
       <meta charset="utf-8"/>
       <title>Client List</title>
-      <link rel="stylesheet" type="text/css" href="~/css/site.css?1.0" media="all"/>
+      <link rel="stylesheet" type="text/css" href="~/css/main.css" media="all"/>
   </head>
   <body>
     <div class="container">
@@ -42,7 +42,7 @@
                 class="edit-btn" 
                 data-name="@customer.Name"
                 data-country="@customer.Country"
-                onclick="showForm((event) => editCustomer(event, @customer.CustomerId), this, '@customer.Name', '@customer.Country')"
+                onclick="showForm((event) => editCustomer(event, @customer.CustomerId), this)"
               >
                 Edit
               </button>
@@ -71,27 +71,15 @@
       </form>
     </section>
     
-    <script src="~/js/site.js?1.0"></script>
+    <script src="~/ts/main.js"></script>
     <script>
-      const showForm = (submitFunction, invokeBtn) => {
-        CustomerFunc.showForm({ submitFunction, invokeBtn })
-      }
+      const customerInstance = new CustomerView()
 
-      const unshowForm = () => {
-        CustomerFunc.unshowForm()
-      }
-
-      const addCustomer = async (event) => {
-        await CustomerFunc.addCustomer({ event })
-      }
-
-      const editCustomer = async (event, customerId) => {
-        await CustomerFunc.editCustomer({ event, customerId })
-      }
-
-      const deleteCustomer = async (customerId) => {
-        await CustomerFunc.deleteCustomer({ customerId })
-      }
+      const showForm = (submitFun, invokeBtn) => customerInstance.showForm({ submitFun, invokeBtn })
+      const unshowForm = () => customerInstance.unshowForm()
+      const addCustomer = async (event) => await customerInstance.addCustomer(event)
+      const editCustomer = async (event, customerId) => await customerInstance.updateCustomer(event, customerId)
+      const deleteCustomer = async (customerId) => await customerInstance.deleteCustomer(customerId)
     </script>
   </body>
 </html>
