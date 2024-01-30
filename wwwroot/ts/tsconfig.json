@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "ES2022",
+    "target": "ES6",
+    "lib": ["ES2023", "dom"],
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true
+  },
+  "include": ["*.ts"],
+  "exclude": ["node_modules"]
+}

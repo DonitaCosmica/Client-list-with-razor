@@ -1,0 +1,17 @@
+{
+  "name": "aprendizaje",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "compile-sass-ts": "sass wwwroot/scss/main.scss wwwroot/css/main.css && tsc -p wwwroot/ts/tsconfig.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "1.70.0",
+    "typescript": "5.3.3"
+  }
+}

@@ -1,0 +1,12 @@
+$primary-color: #007bff;
+$text-color: #fff;
+$line-color: #000;
+$odd-list-color: f9f9f9;
+$background-form: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+
+$btns: (
+  ("#send-btn", #007bff, #0060c7),
+  (".add-btn", #28a745, #218838),
+  (".edit-btn", #c2b238, #b6a735),
+  (".delete-btn", #dc3545, #c82333)
+);
