@@ -107,7 +107,6 @@ class CustomerView {
     deleteCustomer(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log(customerId);
                 const res = yield fetch(`/api/customerapi/deletecustomer/${customerId}`, {
                     method: 'DELETE'
                 });

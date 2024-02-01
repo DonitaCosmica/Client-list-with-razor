@@ -6,7 +6,7 @@ namespace Aprendizaje.Controllers
 {
   public class CustomerController : Controller
   {
-    private const string ConnectionString = "Data Source=RAYOLAPDONNET;Initial Catalog=Company;Integrated Security=True;";
+    private const string ConnectionString = "Data Source=RAYOSISTEMAS1;Initial Catalog=Company;Integrated Security=True;";
 
     [HttpGet]
     [Route("api/customerapi/getcustomers")]
@@ -64,6 +64,7 @@ namespace Aprendizaje.Controllers
     {
       string sqlQuery = "DELETE FROM Customers WHERE CustomerId = @CustomerId;";
       if(!ExecuteModifyQuery(sqlQuery, new SqlParameter("@CustomerId", customerId))) return BadRequest();
+      
       return Ok(new { message = "Customer has been eliminated correctly!" });
     }
 

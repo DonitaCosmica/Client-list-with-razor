@@ -10,6 +10,8 @@
               <xs:element name="TargetFramework" type="xs:string" />
               <xs:element name="ImplicitUsings" type="xs:string" />
               <xs:element name="Nullable" type="xs:string" />
+              <xs:element name="GenerateDocumentationFile" type="xs:string" />
+              <xs:element name="NoWarn" type="xs:string" />
               <xs:element name="PreBuildEvent" type="xs:string" />
             </xs:sequence>
           </xs:complexType>

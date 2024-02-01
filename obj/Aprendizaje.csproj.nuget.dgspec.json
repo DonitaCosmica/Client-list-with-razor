@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sistemas\\Documents\\Deveolpment\\C#\\Client-list-with-razor\\Aprendizaje.csproj": {}
+    "C:\\Users\\sistemas\\Documents\\Work\\client-list-with-razor\\Aprendizaje.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sistemas\\Documents\\Deveolpment\\C#\\Client-list-with-razor\\Aprendizaje.csproj": {
+    "C:\\Users\\sistemas\\Documents\\Work\\client-list-with-razor\\Aprendizaje.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sistemas\\Documents\\Deveolpment\\C#\\Client-list-with-razor\\Aprendizaje.csproj",
+        "projectUniqueName": "C:\\Users\\sistemas\\Documents\\Work\\client-list-with-razor\\Aprendizaje.csproj",
         "projectName": "Aprendizaje",
-        "projectPath": "C:\\Users\\sistemas\\Documents\\Deveolpment\\C#\\Client-list-with-razor\\Aprendizaje.csproj",
+        "projectPath": "C:\\Users\\sistemas\\Documents\\Work\\client-list-with-razor\\Aprendizaje.csproj",
         "packagesPath": "C:\\Users\\sistemas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sistemas\\Documents\\Deveolpment\\C#\\Client-list-with-razor\\obj\\",
+        "outputPath": "C:\\Users\\sistemas\\Documents\\Work\\client-list-with-razor\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sistemas\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -45,6 +45,10 @@
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[8.0.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
