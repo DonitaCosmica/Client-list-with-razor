@@ -14,7 +14,7 @@
       <div class="add-btn-container">
         <button 
           class="add-btn" 
-          onclick="showForm((event) => addCustomer(event), this)"
+          onclick="showForm(this)"
         >
           New
         </button>
@@ -39,16 +39,17 @@
             <td>@customer.Country</td>
             <td>
               <button 
-                class="edit-btn" 
+                class="edit-btn"
+                data-id="@customer.CustomerId"
                 data-name="@customer.Name"
                 data-country="@customer.Country"
-                onclick="showForm((event) => editCustomer(event, @customer.CustomerId), this)"
+                onclick="showForm(this)"
               >
                 Edit
               </button>
               <button 
                 class="delete-btn" 
-                onclick="deleteCustomer(@customer.CustomerId)"
+                onclick="deleteCustomer('@customer.CustomerId')"
               >
                 Delete
               </button>
@@ -63,8 +64,7 @@
         <div class="cancel-btn-container" onclick="unshowForm()">
           <span class="cancel-btn"></span>
         </div>
-        <h2>Create new customer</h2>
-        <input type="number" id="icustomer" placeholder="Id" autoComplete="off">
+        <h2 id="title-form">Create new customer</h2>
         <input type="text" id="ncustomer" placeholder="Name" autoComplete="off">
         <input type="text" id="ccustomer" placeholder="Country" autoComplete="off">
         <button id="send-btn"></button>
@@ -75,10 +75,17 @@
     <script>
       const customerInstance = new CustomerView()
 
-      const showForm = (submitFun, invokeBtn) => customerInstance.showForm({ submitFun, invokeBtn })
+      const showForm = (invokeBtn) => {
+        const customerForm = document.getElementById('customerForm')
+        
+        if(invokeBtn.className === 'add-btn') document.getElementById('customerForm').onsubmit = addCustomer
+        else document.getElementById('customerForm').onsubmit = editCustomer
+
+        customerInstance.showForm(invokeBtn)
+      }
       const unshowForm = () => customerInstance.unshowForm()
       const addCustomer = async (event) => await customerInstance.addCustomer(event)
-      const editCustomer = async (event, customerId) => await customerInstance.updateCustomer(event, customerId)
+      const editCustomer = async (event) => await customerInstance.updateCustomer(event)
       const deleteCustomer = async (customerId) => await customerInstance.deleteCustomer(customerId)
     </script>
   </body>

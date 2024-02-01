@@ -56,17 +56,27 @@ table {
 
   thead {
     tr {
+      display: flex;
+
       th {
+        flex: 1;
         background-color: def.$primary-color;
         color: def.$text-color;
         padding: 10px;
         text-align: center;
+
+        &:first-child {
+          flex: 2;
+        }
       }
     }
   }
 
   tbody {
     tr {
+      display: flex;
+      align-items: center;
+
       &:nth-child(odd) {
         background-color: def.$odd-list-color;
       }
@@ -76,8 +86,14 @@ table {
       }
 
       td {
+        flex: 1;
         padding: 10px;
-        border-bottom: 1px solid #ddd;
+        text-align: center;
+        font-size: 0.9rem;
+
+        &:first-child {
+          flex: 2;
+        }
 
         &:last-child {
           @include centerDiv;
@@ -92,10 +108,28 @@ table {
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
-  margin-right: 5px;
   transition: background-color 0.3s;
   cursor: pointer;
 }
+
+// @each $selector, $colors in def.$btns {
+//   $color: nth($colors, 1);
+//   $hvColor: nth($colors, 2);
+
+//   #{ $selector } {
+//     background-color: $color;
+
+//     &:hover {
+//       background-color: $hvColor;
+//     }
+//   }
+
+//   @if $selector == ".edit-btn" {
+//     margin-right: 5px;
+//   } @else if $selector == ".delete-btn" {
+//     margin-left: 5px;
+//   }
+// }
 
 @each $btn in def.$btns {
   $selector: nth($btn, 1);
@@ -104,11 +138,19 @@ table {
 
   #{ $selector } {
     background-color: $color;
-  }
 
-  #{ $selector }:hover {
-    background-color: $hvColor;
+    &:hover {
+      background-color: $hvColor;
+    }
   }
+}
+
+.edit-btn {
+  margin-right: 5px;
+}
+
+.delete-btn {
+  margin-left: 5px;
 }
 
 #form-background {

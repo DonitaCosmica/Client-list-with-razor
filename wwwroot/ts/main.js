@@ -12,30 +12,29 @@ class CustomerView {
     constructor() {
         this.isFieldEmpty = (value) => (value === null || value === void 0 ? void 0 : value.trim()) !== '';
         this.background = this.getElement('form-background');
-        this.icustomerStyle = this.getElement('icustomer');
-        this.icustomer = this.getElement('icustomer');
         this.ncustomer = this.getElement('ncustomer');
         this.ccustomer = this.getElement('ccustomer');
+        this.funBtn = null;
     }
-    showForm(opt) {
+    showForm(invokeBtn) {
         var _a, _b;
         try {
-            const submitFunc = this.getElement('customerForm');
             const sendBtn = this.getElement('send-btn');
+            const titleForm = this.getElement('title-form');
+            this.funBtn = invokeBtn;
             this.background.style.display = 'flex';
             this.background.style.top = `${window.scrollY}px`;
-            submitFunc.onsubmit = opt.submitFunc;
             document.body.style.overflow = 'hidden';
-            if (opt.invokeBtn.className === 'add-btn') {
-                this.icustomerStyle.style.display = 'block';
+            if (invokeBtn.className === 'add-btn') {
+                titleForm.innerText = 'Agregar nuevo cliente';
                 this.ncustomer.value = '';
                 this.ccustomer.value = '';
                 sendBtn.innerText = 'Crear';
             }
             else {
-                this.icustomerStyle.style.display = 'none';
-                this.ncustomer.value = (_a = opt.invokeBtn.getAttribute('data-name')) !== null && _a !== void 0 ? _a : '';
-                this.ccustomer.value = (_b = opt.invokeBtn.getAttribute('data-country')) !== null && _b !== void 0 ? _b : '';
+                titleForm.innerText = 'Editar cliente';
+                this.ncustomer.value = (_a = invokeBtn.getAttribute('data-name')) !== null && _a !== void 0 ? _a : '';
+                this.ccustomer.value = (_b = invokeBtn.getAttribute('data-country')) !== null && _b !== void 0 ? _b : '';
                 sendBtn.innerText = 'Actualizar';
             }
         }
@@ -51,28 +50,22 @@ class CustomerView {
         return __awaiter(this, void 0, void 0, function* () {
             event.preventDefault();
             const newCustomer = {
-                customerId: this.icustomer.value,
                 name: this.ncustomer.value,
                 country: this.ccustomer.value
             };
             const validation = Object.values(newCustomer).every(this.isFieldEmpty);
             if (!validation)
                 return;
-            const dataToSend = {
-                customerId: parseInt(newCustomer.customerId),
-                name: newCustomer.name,
-                country: newCustomer.country
-            };
             try {
                 const res = yield fetch('/api/customerapi/addcustomer', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(dataToSend)
+                    body: JSON.stringify(newCustomer)
                 });
                 const data = yield res.json();
-                console.log(data);
+                console.log(data.message);
             }
             catch (error) {
                 console.error(error);
@@ -80,7 +73,8 @@ class CustomerView {
             this.unshowForm();
         });
     }
-    updateCustomer(event, customerId) {
+    updateCustomer(event) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function* () {
             event.preventDefault();
             const customer = {
@@ -90,21 +84,19 @@ class CustomerView {
             const validation = Object.values(customer).every(this.isFieldEmpty);
             if (!validation)
                 return;
-            const dataToSend = {
-                customerId: customerId,
-                name: customer.name,
-                country: customer.country
-            };
             try {
-                const res = yield fetch('/api/customerapi/updatecustomer', {
+                const customerId = (_b = (_a = this.funBtn) === null || _a === void 0 ? void 0 : _a.getAttribute('data-id')) !== null && _b !== void 0 ? _b : '';
+                if (customerId === '')
+                    throw new Error('Error');
+                const res = yield fetch(`/api/customerapi/updatecustomer/${customerId}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(dataToSend)
+                    body: JSON.stringify(customer)
                 });
                 const data = yield res.json();
-                console.log(data);
+                console.log(data.message);
             }
             catch (error) {
                 console.error(error);
@@ -115,11 +107,12 @@ class CustomerView {
     deleteCustomer(customerId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log(customerId);
                 const res = yield fetch(`/api/customerapi/deletecustomer/${customerId}`, {
                     method: 'DELETE'
                 });
                 const data = yield res.json();
-                console.log(data);
+                console.log(data.message);
             }
             catch (error) {
                 console.error(error);

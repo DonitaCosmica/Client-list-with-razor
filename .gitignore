@@ -1,2 +1,5 @@
-package-lock.json
+pnpm-lock.yaml
 node_modules/
+wwwroot/ts/main.js
+wwwroot/ts/main.js.map
+wwwroot/css/*

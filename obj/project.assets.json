@@ -7973,11 +7973,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sistemas\\Documents\\Work\\Aprendizaje\\Aprendizaje.csproj",
+      "projectUniqueName": "C:\\Users\\sistemas\\Documents\\Deveolpment\\C#\\Client-list-with-razor\\Aprendizaje.csproj",
       "projectName": "Aprendizaje",
-      "projectPath": "C:\\Users\\sistemas\\Documents\\Work\\Aprendizaje\\Aprendizaje.csproj",
+      "projectPath": "C:\\Users\\sistemas\\Documents\\Deveolpment\\C#\\Client-list-with-razor\\Aprendizaje.csproj",
       "packagesPath": "C:\\Users\\sistemas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sistemas\\Documents\\Work\\Aprendizaje\\obj\\",
+      "outputPath": "C:\\Users\\sistemas\\Documents\\Deveolpment\\C#\\Client-list-with-razor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sistemas\\AppData\\Roaming\\NuGet\\NuGet.Config"

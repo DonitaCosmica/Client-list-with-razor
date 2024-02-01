@@ -1,48 +1,44 @@
-interface IShowFormOptions {
-  submitFunc: () => void
-  invokeBtn: HTMLElement
-}
-
 interface ICustomerInfo {
-  customerId?: number | string,
   name: string,
   country: string
 }
 
+interface MsgRes {
+  message: string
+}
+
 class CustomerView {
   private readonly background: HTMLElement
-  private readonly icustomerStyle: HTMLElement
-  private readonly icustomer: HTMLInputElement
   private readonly ncustomer: HTMLInputElement
   private readonly ccustomer: HTMLInputElement
+  private funBtn: HTMLButtonElement | null
 
   public constructor() {
     this.background = this.getElement('form-background')
-    this.icustomerStyle = this.getElement('icustomer')
-    this.icustomer = this.getElement('icustomer') as HTMLInputElement
     this.ncustomer = this.getElement('ncustomer') as HTMLInputElement
     this.ccustomer = this.getElement('ccustomer') as HTMLInputElement
+    this.funBtn = null
   }
 
-  public showForm(opt: IShowFormOptions): void {
+  public showForm(invokeBtn: HTMLElement): void {
     try {
-      const submitFunc: HTMLElement = this.getElement('customerForm')
       const sendBtn: HTMLElement = this.getElement('send-btn')
+      const titleForm: HTMLTitleElement = this.getElement('title-form') as HTMLTitleElement
 
+      this.funBtn = invokeBtn as HTMLButtonElement
       this.background.style.display = 'flex'
       this.background.style.top = `${window.scrollY}px`
-      submitFunc.onsubmit = opt.submitFunc
       document.body.style.overflow = 'hidden'
 
-      if(opt.invokeBtn.className === 'add-btn') {
-        this.icustomerStyle.style.display = 'block'
+      if(invokeBtn.className === 'add-btn') {
+        titleForm.innerText = 'Agregar nuevo cliente'
         this.ncustomer.value = ''
         this.ccustomer.value = ''
         sendBtn.innerText = 'Crear'
       } else {
-        this.icustomerStyle.style.display = 'none'
-        this.ncustomer.value = opt.invokeBtn.getAttribute('data-name') ?? ''
-        this.ccustomer.value = opt.invokeBtn.getAttribute('data-country') ?? ''
+        titleForm.innerText = 'Editar cliente'
+        this.ncustomer.value = invokeBtn.getAttribute('data-name') ?? ''
+        this.ccustomer.value = invokeBtn.getAttribute('data-country') ?? ''
         sendBtn.innerText = 'Actualizar'
       }
     } catch (error) {
@@ -59,7 +55,6 @@ class CustomerView {
     event.preventDefault()
 
     const newCustomer: ICustomerInfo = {
-      customerId: this.icustomer.value,
       name: this.ncustomer.value,
       country: this.ccustomer.value
     }
@@ -67,23 +62,17 @@ class CustomerView {
     const validation: boolean = Object.values(newCustomer).every(this.isFieldEmpty)
     if(!validation) return
 
-    const dataToSend: ICustomerInfo = {
-      customerId: parseInt(newCustomer.customerId as string),
-      name: newCustomer.name,
-      country: newCustomer.country
-    }
-
     try {
       const res: Response = await fetch('/api/customerapi/addcustomer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(dataToSend)
+        body: JSON.stringify(newCustomer)
       })
-      const data = await res.json()
+      const data:MsgRes = await res.json()
 
-      console.log(data)
+      console.log(data.message)
     } catch (error) {
       console.error(error)
     }
@@ -91,7 +80,7 @@ class CustomerView {
     this.unshowForm()
   }
 
-  public async updateCustomer(event: Event, customerId: number): Promise<void> {
+  public async updateCustomer(event: Event): Promise<void> {
     event.preventDefault()
 
     const customer: ICustomerInfo = {
@@ -102,23 +91,20 @@ class CustomerView {
     const validation: boolean = Object.values(customer).every(this.isFieldEmpty)
     if(!validation) return
 
-    const dataToSend: ICustomerInfo = {
-      customerId: customerId,
-      name: customer.name,
-      country: customer.country
-    }
-
     try {
-      const res: Response = await fetch('/api/customerapi/updatecustomer', {
+      const customerId: string = this.funBtn?.getAttribute('data-id') ?? ''
+      if(customerId === '') throw new Error('Error')
+
+      const res: Response = await fetch(`/api/customerapi/updatecustomer/${customerId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(dataToSend)
+        body: JSON.stringify(customer)
       })
-      const data = await res.json()
+      const data: MsgRes = await res.json()
 
-      console.log(data)
+      console.log(data.message)
     } catch (error) {
       console.error(error)
     }
@@ -126,14 +112,14 @@ class CustomerView {
     this.unshowForm()
   }
 
-  public async deleteCustomer(customerId: number): Promise<void> {
+  public async deleteCustomer(customerId: string): Promise<void> {
     try {
       const res: Response = await fetch(`/api/customerapi/deletecustomer/${customerId}`, {
         method: 'DELETE'
       })
-      const data = await res.json()
+      const data: MsgRes = await res.json()
 
-      console.log(data)
+      console.log(data.message)
     } catch (error) {
       console.error(error)
     }

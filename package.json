@@ -1,9 +1,8 @@
 {
-  "name": "aprendizaje",
+  "name": "client-list-with-razor",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
     "compile-sass-ts": "sass wwwroot/scss/main.scss wwwroot/css/main.css && tsc -p wwwroot/ts/tsconfig.json"
   },
