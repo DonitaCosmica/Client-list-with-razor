@@ -1087,3 +1087,5 @@ C:\Users\sistemas\Documents\Work\client-list-with-razor\bin\Debug\net8.0\Swashbu
 C:\Users\sistemas\Documents\Work\client-list-with-razor\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\sistemas\Documents\Work\client-list-with-razor\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\sistemas\Documents\Work\client-list-with-razor\obj\Debug\net8.0\Aprendizaje.xml
+C:\Users\sistemas\Documents\Work\client-list-with-razor\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\sistemas\Documents\Work\client-list-with-razor\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll

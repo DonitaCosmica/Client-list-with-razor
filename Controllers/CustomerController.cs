@@ -1,3 +1,4 @@
+using Aprendizaje.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using Aprendizaje.Models;
@@ -74,9 +75,7 @@ namespace Aprendizaje.Controllers
 
       try
       {
-        using SqlConnection sqlConnection = new(ConnectionString);
-        sqlConnection.Open();
-
+        using SqlConnection sqlConnection = ConnectionDB.GetConnection();
         using SqlCommand sqlCommand = new(sqlQuery, sqlConnection);
         sqlCommand.Parameters.AddRange(parameters);
 
@@ -90,7 +89,7 @@ namespace Aprendizaje.Controllers
             Country = sqlDataReader["Country"].ToString() ?? "Null"
           });
         }
-        sqlConnection.Close();
+        ConnectionDB.CloseConnection();
       }
       catch (Exception ex)
       {
@@ -104,15 +103,12 @@ namespace Aprendizaje.Controllers
     {
       try
       {
-        using SqlConnection sqlConnection = new(ConnectionString);
-        sqlConnection.Open();
-
+        using SqlConnection sqlConnection = ConnectionDB.GetConnection();
         using SqlCommand sqlCommand = new(sqlQuery, sqlConnection);
         sqlCommand.Parameters.AddRange(parameters);
 
         int rowsAffected = sqlCommand.ExecuteNonQuery();
-
-        sqlConnection.Close();
+        ConnectionDB.CloseConnection();
 
         return rowsAffected > 0;
       }
