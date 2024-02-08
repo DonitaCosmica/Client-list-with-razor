@@ -7,8 +7,6 @@ namespace Aprendizaje.Controllers
 {
   public class CustomerController : Controller
   {
-    private const string ConnectionString = "Data Source=RAYOSISTEMAS1;Initial Catalog=Company;Integrated Security=True;";
-
     [HttpGet]
     [Route("api/customerapi/getcustomers")]
     public IActionResult GetCustomers()
